@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var pizzaAngularApp = angular
   .module('pizzaAngularApp', [
     'ngAnimate',
     'ngCookies',
@@ -16,26 +16,31 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch'
-  ])
-  .config(['$httpProvider', function($httpProvider) {
+  ]);
+pizzaAngularApp.controller('MyCtrl', function($scope, $location) {
+  $scope.go = function (path) {
+    $location.path(path);
+  };
+});
+  pizzaAngularApp.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.withCredentials = true;
     delete $httpProvider.defaults.headers.common["X-Requested-With"];
     $httpProvider.defaults.headers.common["Accept"] = "application/json";
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
   }
-  ])
-  .config(function ($routeProvider) {
+  ]);
+  pizzaAngularApp.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/cart', {
+        templateUrl: 'views/cart.html',
+        controller: 'CartCtrl',
+        controllerAs: 'cart'
       })
       .otherwise({
         redirectTo: '/'

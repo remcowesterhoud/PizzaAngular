@@ -1,21 +1,57 @@
 <div>
+
+  <div class="row top-buffer">
     <form>
-        <table class="table table-striped">
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Calories</th>
-                <th>Price</th>
-                <th></th>
-            </tr>
-            <tr ng-repeat="pizza in pizzas">
-                <td>
-                    {{pizza.name}}
-                </td>
-                <td>
-                    <button class="btn btn-success">Add</button>
-                </td>
-            </tr>
-        </table>
+      <table class="table table-striped">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Calories</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+        <tr ng-repeat="pizza in pizzas">
+          <td>
+            {{pizza.name}}
+          </td>
+          <td>
+            {{pizza.description}}
+          </td>
+          <td>
+            <span class="glyphicon glyphicon-fire" aria-hidden="true"/>
+            {{pizza.calories}}
+          </td>
+          <td>
+            {{pizza.price | currency:"€":2}}
+          </td>
+          <td>
+            <button class="btn btn-success">Add</button>
+            <button id="delete" class="btn btn-danger" ng-click="deletePizza(pizza)">Delete</button>
+          </td>
+        </tr>
+      </table>
     </form>
+    <form ng-submit="savePizza()">
+      <div class="col-md-6">
+        <label for="inputPizzaName">Pizza name:</label>
+        <input type="text" ng-model="newPizza.name" id="inputPizzaName" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label for="inputPizzaDescription">Pizza description:</label>
+        <input type="text" ng-model="newPizza.description" id="inputPizzaDescription" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label for="inputPizzaCalories">Pizza calories:</label>
+        <input type="number" ng-model="newPizza.calories" id="inputPizzaCalories" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label for="inputPizzaPrice">Pizza price:</label>
+        <input type="number" step="0.01" ng-model="newPizza.price" id="inputPizzaPrice" class="form-control">
+      </div>
+      <div class="col-md-10 col-md-offset-1 top-buffer">
+        <button type="submit" class="btn btn-success center-block" style="width: 100%">Add</button>
+      </div>
+    </form>
+  </div>
+
 </div>
